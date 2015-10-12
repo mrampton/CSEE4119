@@ -32,6 +32,9 @@ def main(argv):
 	except (KeyboardInterrupt):
 		print "\nShutting down SimpleChatServer"
 		ThreadedTCPServer.running = False
+		for name, user in ThreadedTCPRequestHandler.logged_in.items():
+			if user.logged_in:
+				user.socket.sendall("quit")
 
 	server.shutdown()
 	server.server_close()
@@ -306,7 +309,6 @@ class ThreadedTCPRequestHandler(SocketServer.BaseRequestHandler):
 				try:
 					data = self.request.recv(BUFFSIZE)
 					if not data: 
-						print "Just logged out", user
 						user = self.log_out(user)
 						break
 
