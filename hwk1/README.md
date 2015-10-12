@@ -7,7 +7,7 @@ Server:
 	$ ./server.py 8881
 
 Client:
-	$ ./server.py <server ip> 8881
+	$ ./client.py <server ip> 8881
 
 
 Note: 	Client is not displaying messages as they are recieved. I was testing 
